@@ -1,7 +1,7 @@
 from meal import Meal
 from mealdata import Meal_Data
 
-burger = Meal("burgers", "ground", 2, 2)
+# burger = Meal("burgers", "ground", 2, 2)
 taco = Meal("taco", "ground", 1, 2)
 
 data = Meal_Data()
