@@ -1,5 +1,17 @@
-class MyClass(object):
-    class_var = 1
+from meal import Meal
+from mealdata import Meal_Data
 
-    def __init__(self, i_var):
-        self.i_var = i_var
+burger = Meal("burgers", "ground", 2, 2)
+taco = Meal("taco", "ground", 1, 2)
+
+data = Meal_Data()
+
+data.meal_add(taco)
+# data.meal_add(burger)
+
+# mealtest1 = data.meal_get()[0]
+
+# print(mealtest1.name)
+# print(mealtest1.protein)
+# print(mealtest1.difficulty)
+# print(mealtest1.cost)

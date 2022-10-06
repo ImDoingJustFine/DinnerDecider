@@ -7,9 +7,10 @@ mealtest3 = Meal("pork chop", "pork", 1, 2)
 
 meallist = [mealtest1, mealtest2, mealtest3]
 
-print(mealtest1.tostring())
-
-print(mealtest1.meal_name())
-print(mealtest1.protein_type())
-print(mealtest1.difficulty_rating())
-print(mealtest1.cost_rating())
+print(mealtest1.name)
+print(mealtest1.protein)
+print(mealtest1.difficulty)
+print(mealtest1.cost)
+# print(mealtest1.protein_type())
+# print(mealtest1.difficulty_rating())
+# print(mealtest1.cost_rating())
