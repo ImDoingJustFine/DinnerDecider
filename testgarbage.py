@@ -3,11 +3,14 @@ from mealdata import Meal_Data
 
 # burger = Meal("burgers", "ground", 2, 2)
 taco = Meal("taco", "ground", 1, 2)
+steak = Meal("steak", "beef", 5, 1)
+f_ckn_sandwhich = Meal("fried chicken sandwhich", "chicken", 2, 3)
 
 data = Meal_Data()
 
 data.meal_add(taco)
-# data.meal_add(burger)
+data.meal_add(steak)
+data.meal_add(f_ckn_sandwhich)
 
 # mealtest1 = data.meal_get()[0]
 
