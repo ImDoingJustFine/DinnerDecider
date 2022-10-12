@@ -6,15 +6,9 @@
     "difficulty": 2
   },
   {
-    "name": "steak",
-    "protein": "beef",
-    "cost": 5,
-    "difficulty": 1
-  },
-  {
-    "name": "fried chicken sandwhich",
-    "protein": "chicken",
-    "cost": 2,
-    "difficulty": 3
+    "name": "pizza",
+    "protein": "other",
+    "cost": 2.5,
+    "difficulty": 3.1
   }
 ]

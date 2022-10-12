@@ -1,6 +1,4 @@
-from unicodedata import name
 import json
-
 
 class Meal:
     """Class that holds all necessary characteristics of a meal"""
@@ -11,8 +9,8 @@ class Meal:
         self.name = name.lower()
         self.protein = protein.lower()
         # TODO: validate range
-        self.cost = cost
-        self.difficulty = difficulty
+        self.cost = self.validate_cost(cost)
+        self.difficulty = self.validate_difficulty(difficulty)
         
     def as_dict(self):
         """Turns an instance of the Meal object into a dictionary"""
@@ -20,10 +18,24 @@ class Meal:
         meal_dict = {'name':self.name, 'protein':self.protein, 'cost':self.cost, 'difficulty':self.difficulty}
         return meal_dict
     
-    # def __init__(self, input:dict):
-    #     """Initializes a meal from a Dictionary Input"""
+    def validate_cost(self, cost):
+        """Validates that cost is within boundries and has no decimal places"""
         
-    #     self.name = input['name']
-    #     self.protein = input['protein']
-    #     self.difficulty = input['difficulty']
-    #     self.cost = input['cost']          
+        if cost > 5:
+            cost = 5
+        if cost < 1:
+            cost = 1
+        if isinstance(cost) == False:
+            int(round(cost))
+        return self.cost
+    
+    def validate_difficulty(self, difficulty):
+        """Validates that difficulty is within boundries and has no decimal places"""
+        
+        if difficulty > 5:
+            difficulty = 5
+        if difficulty < 1:
+            difficulty = 1
+        if isinstance(difficulty) == False:
+            int(round(difficulty))
+        return difficulty
