@@ -1,5 +1,3 @@
-from pickle import NONE
-from unicodedata import name
 from meal import Meal
 import json
 
