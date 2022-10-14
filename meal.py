@@ -9,8 +9,10 @@ class Meal:
         self.name = name.lower()
         self.protein = protein.lower()
         # TODO: validate range
-        self.cost = self.validate_cost(cost)
-        self.difficulty = self.validate_difficulty(difficulty)
+        self.validate_cost(cost)
+        self.validate_difficulty(difficulty)
+        self.cost = cost
+        self.difficulty = cost
         
     def as_dict(self):
         """Turns an instance of the Meal object into a dictionary"""
@@ -25,9 +27,8 @@ class Meal:
             cost = 5
         if cost < 1:
             cost = 1
-        if isinstance(cost) == False:
-            int(round(cost))
-        return self.cost
+        int(round(cost))
+        return cost
     
     def validate_difficulty(self, difficulty):
         """Validates that difficulty is within boundries and has no decimal places"""
@@ -36,6 +37,5 @@ class Meal:
             difficulty = 5
         if difficulty < 1:
             difficulty = 1
-        if isinstance(difficulty) == False:
-            int(round(difficulty))
+        int(round(difficulty))
         return difficulty
