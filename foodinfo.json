@@ -1,8 +1,8 @@
 [
   {
-    "name": "fried chicken sandwhich",
-    "protein": "chicken",
-    "cost": 2,
+    "name": "taco",
+    "protein": "ground",
+    "cost": 1,
     "difficulty": 2
   }
 ]
