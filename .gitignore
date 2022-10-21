@@ -1,3 +1,7 @@
+# Ignore data files
+*.json
+
+# VS Code Shenanigans
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
