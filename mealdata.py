@@ -1,3 +1,4 @@
+from operator import index
 from meal import Meal
 import json
 
@@ -41,8 +42,17 @@ class Meal_Data:
         return jsondump
             
     # -- TODO : make a function to delete a Meal object that is stored inside foodinfo.json --
-    # def meal_del(self):
-    #     """Removes an instance of the Meal class inside foodinfo.json"""
+    def meal_del(self, name:str):
+        """Removes an instance of the Meal class inside foodinfo.json"""
+        
+        meals = self.meal_get()
+        mealtoremove = self.meal_find(name)
+        for meal in meals:
+            if meal.name == mealtoremove.name:   
+                index = meals.index(meal)
+            else: pass
+        del meals[index]
+        self.meal_save(meals)
  
  
     def meal_get(self):
