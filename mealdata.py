@@ -62,9 +62,8 @@ class Meal_Data:
 
     def meal_get(self) -> list[Meal]:
         """Returns a list of meals"""
-
-        meals = []
-
+        
+        
         try:
             with open(self.filename) as f:
                 jsondata = json.load(f)
@@ -75,13 +74,15 @@ class Meal_Data:
             return []
         # -- When the following error occurs, the list of meals is simply left as an empty list --
         except json.JSONDecodeError:
-            pass
-        else:
+            # crete empty JSONData for following loop
+            jsondata = []
+
         # -- The folowing for loop takes the JSON objects found in foodinfo.json and turns them into Python objects --
-        # -- and then appends those objects into the meals list                                                     --
-            for item in jsondata:
-                meal = Meal(item['name'],item['protein'],item['cost'],item['difficulty'])
-                meals.append(meal)
+        # -- and then appends those objects into the meals list        
+        meals = []
+        for item in jsondata:
+            meal = Meal(item['name'],item['protein'],item['cost'],item['difficulty'])
+            meals.append(meal)
         return meals
     
     
