@@ -1,15 +1,14 @@
 from operator import index
 from meal import Meal
 import json
+import sqlite3
 
 class Meal_Data:
     """Data layer to be used in conjunction with the Meal class"""
-    
-    filename = "foodinfo.json"
 
-    def __init__(self):
+    def __init__(self, filename = "foodinfo.json"):
         """Initializes Meal_Data"""
-        pass
+        self.filename = filename
 
 
     def meal_add(self, meal:Meal):
@@ -26,7 +25,7 @@ class Meal_Data:
             return
 
         
-    def meal_save(self, meals:list):
+    def meal_save(self, meals:list) -> None:
         """Saves a list of meals to the JSON"""
         
         jsonmeals = []
@@ -35,52 +34,69 @@ class Meal_Data:
             jsonmeal = mealobj.as_dict()
             jsonmeals.append(jsonmeal)
         # -- Following two lines converts the list of dictionaries made above into JSON format and saves to foodinfo.json --
-        with open(self.filename, 'w') as f:
-            json.dump(jsonmeals, f, indent=2)
+        
+        # TODO: Handle Missing File
+        f = open(self.filename, 'w')
+        f.flush()
+        json.dump(jsonmeals, f, indent=2)
+        f.close()
         # -- Next two lines print out to string the list of Meals in JSON format --
-        jsondump = json.dumps(jsonmeals, indent=2)
-        return jsondump
+        # jsondump = json.dumps(jsonmeals, indent=2)
+        # print(jsondump)
+        return
             
     # -- TODO : make a function to delete a Meal object that is stored inside foodinfo.json --
     def meal_del(self, name:str):
         """Removes an instance of the Meal class inside foodinfo.json"""
         
         meals = self.meal_get()
-        mealtoremove = self.meal_find(name)
+
+        # Loop over all meals and remove 
         for meal in meals:
-            if meal.name == mealtoremove.name:   
+            if meal.name == name:
                 index = meals.index(meal)
-            else: pass
-        del meals[index]
+                del meals[index]
+            else: 
+                pass
+        # END FOR
+        
         self.meal_save(meals)
  
- 
-    def meal_get(self):
+
+    def meal_get(self) -> list[Meal]:
         """Returns a list of meals"""
-
-        meals = []
-
         try:
-            with open(self.filename) as f:
-                jsondata = json.load(f)
-        # -- TODO : If the foodinfo.json is not found it should make a .json file by that name --
+            f = open(self.filename)
+        # TODO : If the foodinfo.json is not found it should make a .json file by that name --
         except FileNotFoundError:
             error_message = f"\nFile {self.filename} was not found.\n"
             print(error_message)
-            return
+            return []
+
+        # Explicit flush to ensure we have the latest version of the file on disk
+        f.flush()        
+
+        try:
+            jsondata = json.load(f)
         # -- When the following error occurs, the list of meals is simply left as an empty list --
         except json.JSONDecodeError:
-            pass
-        else:
+            # crete empty JSONData for following loop
+            jsondata = []
+
+        # Close file handle
+        f.close()
+
         # -- The folowing for loop takes the JSON objects found in foodinfo.json and turns them into Python objects --
-        # -- and then appends those objects into the meals list                                                     --
-            for item in jsondata:
-                meal = Meal(item['name'],item['protein'],item['cost'],item['difficulty'])
-                meals.append(meal)
+        # -- and then appends those objects into the meals list        
+        meals = []
+        for item in jsondata:
+            meal = Meal(item['name'],item['protein'],item['cost'],item['difficulty'])
+            meals.append(meal)
+        
         return meals
     
     
-    def meal_find(self, name:str):
+    def meal_find(self, name:str) -> Meal:
         """Returns a specific meal object when searching for a meal by name"""
         
         meals = self.meal_get()
@@ -89,4 +105,4 @@ class Meal_Data:
         for obj in meals:
             if obj.name == name:
                 return obj
-        return None       
+        return None
