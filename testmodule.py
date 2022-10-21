@@ -134,8 +134,8 @@ class TestCases(unittest.TestCase):
         meal_gets = self.data.meal_get()
         self.assertEqual(meal_gets[0].name, meal2.name)
         self.assertEqual(meal_gets[1].name, meal3.name)   
-        # self.clean_slate() # -- >> Overwrites whatever's in foodinfo.json to an empty list
-        # self.assertEqual(self.data.meal_get(), self.emptylist) # -- >> Makes sure self.clean_slate() did its job
+        self.clean_slate() # -- >> Overwrites whatever's in foodinfo.json to an empty list
+        self.assertEqual(self.data.meal_get(), self.emptylist) # -- >> Makes sure self.clean_slate() did its job
     
     
     # Does not work as intended

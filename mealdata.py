@@ -26,7 +26,7 @@ class Meal_Data:
             return
 
         
-    def meal_save(self, meals:list):
+    def meal_save(self, meals:list) -> None:
         """Saves a list of meals to the JSON"""
         
         jsonmeals = []
@@ -38,24 +38,29 @@ class Meal_Data:
         with open(self.filename, 'w') as f:
             json.dump(jsonmeals, f, indent=2)
         # -- Next two lines print out to string the list of Meals in JSON format --
-        jsondump = json.dumps(jsonmeals, indent=2)
-        return jsondump
+        # jsondump = json.dumps(jsonmeals, indent=2)
+        # print(jsondump)
+        return
             
     # -- TODO : make a function to delete a Meal object that is stored inside foodinfo.json --
     def meal_del(self, name:str):
         """Removes an instance of the Meal class inside foodinfo.json"""
         
         meals = self.meal_get()
-        mealtoremove = self.meal_find(name)
+
+        # Loop over all meals and remove 
         for meal in meals:
-            if meal.name == mealtoremove.name:   
+            if meal.name == name:
                 index = meals.index(meal)
-            else: pass
-        del meals[index]
+                del meals[index]
+            else: 
+                pass
+        # END FOR
+        
         self.meal_save(meals)
  
- 
-    def meal_get(self):
+
+    def meal_get(self) -> list[Meal]:
         """Returns a list of meals"""
 
         meals = []
@@ -67,7 +72,7 @@ class Meal_Data:
         except FileNotFoundError:
             error_message = f"\nFile {self.filename} was not found.\n"
             print(error_message)
-            return
+            return []
         # -- When the following error occurs, the list of meals is simply left as an empty list --
         except json.JSONDecodeError:
             pass
@@ -80,7 +85,7 @@ class Meal_Data:
         return meals
     
     
-    def meal_find(self, name:str):
+    def meal_find(self, name:str) -> Meal:
         """Returns a specific meal object when searching for a meal by name"""
         
         meals = self.meal_get()
