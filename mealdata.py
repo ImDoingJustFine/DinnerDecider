@@ -11,7 +11,7 @@ class Meal_Data:
         self.filename = filename
 
 
-    def meal_add(self, meal:Meal):
+    def meal_add(self, meal:Meal) -> None:
         """Stores an instance of the Meal class inside foodinfo.json"""
         
         dupe_check = self.meal_find(meal.name)
@@ -40,13 +40,13 @@ class Meal_Data:
         f.flush()
         json.dump(jsonmeals, f, indent=2)
         f.close()
-        # -- Next two lines print out to string the list of Meals in JSON format --
-        # jsondump = json.dumps(jsonmeals, indent=2)
-        # print(jsondump)
+        
+        # -- NNext line prints out to string the list of Meals in JSON format --
+        # print(json.dumps(jsonmeals, indent=2))
         return
             
     # -- TODO : make a function to delete a Meal object that is stored inside foodinfo.json --
-    def meal_del(self, name:str):
+    def meal_del(self, name:str) -> None:
         """Removes an instance of the Meal class inside foodinfo.json"""
         
         meals = self.meal_get()
@@ -65,6 +65,7 @@ class Meal_Data:
 
     def meal_get(self) -> list[Meal]:
         """Returns a list of meals"""
+        
         try:
             f = open(self.filename)
         # TODO : If the foodinfo.json is not found it should make a .json file by that name --
