@@ -1,4 +1,3 @@
-from operator import index
 from meal import Meal
 import json
 
@@ -39,6 +38,7 @@ class Meal_Data:
         for mealobj in meals:
             jsonmeal = mealobj.as_dict()
             jsonmeals.append(jsonmeal)
+        # -- END FOR
         
         # -- Loads foodinfo.json and saves the list of Meal objects to it
         f = open(self.filename, 'w')
@@ -115,3 +115,4 @@ class Meal_Data:
                 return obj
             else:
                 return None
+        # -- END FOR

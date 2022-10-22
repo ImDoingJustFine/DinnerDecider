@@ -192,7 +192,7 @@ class TestMealdata(unittest.TestCase):
     
     
     # Does not work as intended
-    # -- With lines 149, 150, and 34 commented out, there should be one instance of the Meal class (steak) in a list inside foodinfo.json
+    # -- With line 38 commented out, there should be one instance of the Meal class (steak) in a list inside foodinfo.json
     # -- Instead foodinfo.json contains a list with two instances of the meal class (one is steak) in a list inside foodinfo.json
     # -- Somehow, the code supposedly passes all tests
     def test_multiple_delete(self):
